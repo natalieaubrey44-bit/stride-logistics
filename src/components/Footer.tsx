@@ -1,6 +1,14 @@
 import { Link } from 'react-router-dom';
 
-const footerColumns = [
+type FooterColumn = {
+  title: string;
+  links: Array<{
+    label: string;
+    to: string;
+  }>;
+};
+
+const footerColumns: FooterColumn[] = [
   {
     title: 'Company',
     links: [

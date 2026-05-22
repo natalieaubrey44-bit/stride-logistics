@@ -1,8 +1,16 @@
 import { useEffect, useState, useRef } from 'react';
 
-export default function CountUp({ end, duration = 2000, label, prefix = '', suffix = '' }) {
+type CountUpProps = {
+  end: number;
+  duration?: number;
+  label: string;
+  prefix?: string;
+  suffix?: string;
+};
+
+export default function CountUp({ end, duration = 2000, label, prefix = '', suffix = '' }: CountUpProps) {
   const [count, setCount] = useState(0);
-  const ref = useRef(null);
+  const ref = useRef<HTMLDivElement | null>(null);
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {

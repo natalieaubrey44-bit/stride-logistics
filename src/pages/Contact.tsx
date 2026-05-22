@@ -1,10 +1,19 @@
 import { useState } from 'react';
+import type { ChangeEvent, FormEvent } from 'react';
 import Footer from '../components/Footer';
 import SEO from '../components/SEO';
 import { sanitizeInput } from '../lib/sanitize';
 
+type ContactFormData = {
+  fullName: string;
+  email: string;
+  origin: string;
+  destination: string;
+  message: string;
+};
+
 export default function Contact() {
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<ContactFormData>({
     fullName: '',
     email: '',
     origin: '',
@@ -17,7 +26,7 @@ export default function Contact() {
 
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-  const handleChange = (e) => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
       ...prev,
@@ -25,7 +34,7 @@ export default function Contact() {
     }));
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setError('');
     setNotice('');
@@ -164,7 +173,7 @@ export default function Contact() {
                   value={formData.message}
                   onChange={handleChange}
                   placeholder="Tell us about your cargo (weight, dimensions, cargo type)..."
-                  rows="5"
+                  rows={5}
                   required
                 />
               </div>

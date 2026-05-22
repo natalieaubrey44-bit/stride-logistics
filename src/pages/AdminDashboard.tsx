@@ -1,32 +1,13 @@
 import { useState, useEffect } from 'react';
+import type { FormEvent } from 'react';
 import SEO from '../components/SEO';
 import { supabase } from '../lib/supabaseClient';
 import { generateTrackingNumber } from '../lib/generateTracking';
-
-const STATUS_OPTIONS = [
-  'Booked',
-  'In Transit',
-  'At Customs',
-  'In Wharf',
-  'Arrived',
-  'Delivered'
-];
-
-const getStatusClass = (status) => {
-  const statusMap = {
-    Booked: 'status-booked',
-    'In Transit': 'status-in-transit',
-    'At Customs': 'status-at-customs',
-    'In Wharf': 'status-in-wharf',
-    Arrived: 'status-arrived',
-    Delivered: 'status-delivered'
-  };
-
-  return statusMap[status] || 'status-booked';
-};
+import { getStatusClass, STATUS_OPTIONS } from '../types';
+import type { Shipment, ShipmentStatus } from '../types';
 
 export default function AdminDashboard() {
-  const [shipments, setShipments] = useState([]);
+  const [shipments, setShipments] = useState<Shipment[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
@@ -34,13 +15,13 @@ export default function AdminDashboard() {
   const [customerName, setCustomerName] = useState('');
   const [origin, setOrigin] = useState('');
   const [destination, setDestination] = useState('');
-  const [status, setStatus] = useState('Booked');
+  const [status, setStatus] = useState<ShipmentStatus>('Booked');
   const [statusNote, setStatusNote] = useState('');
   const [createdTrackingNumber, setCreatedTrackingNumber] = useState('');
 
   // Editing State
-  const [editingShipment, setEditingShipment] = useState(null);
-  const [editStatus, setEditStatus] = useState('Booked');
+  const [editingShipment, setEditingShipment] = useState<Shipment | null>(null);
+  const [editStatus, setEditStatus] = useState<ShipmentStatus>('Booked');
   const [editStatusNote, setEditStatusNote] = useState('');
 
   const fetchShipments = async () => {
@@ -53,7 +34,7 @@ export default function AdminDashboard() {
         .order('created_at', { ascending: false });
 
       if (fetchError) throw fetchError;
-      setShipments(data || []);
+      setShipments((data || []) as Shipment[]);
     } catch {
       setError('Failed to fetch shipments. Please refresh the page.');
     } finally {
@@ -69,7 +50,7 @@ export default function AdminDashboard() {
     return () => window.clearTimeout(timeoutId);
   }, []);
 
-  const handleCreateShipment = async (e) => {
+  const handleCreateShipment = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setError('');
     setCreatedTrackingNumber('');
@@ -110,7 +91,7 @@ export default function AdminDashboard() {
     }
   };
 
-  const handleStartEdit = (shipment) => {
+  const handleStartEdit = (shipment: Shipment) => {
     setEditingShipment(shipment);
     setEditStatus(shipment.status);
     setEditStatusNote(shipment.status_note || '');
@@ -120,9 +101,11 @@ export default function AdminDashboard() {
     setEditingShipment(null);
   };
 
-  const handleUpdateShipment = async (e) => {
+  const handleUpdateShipment = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setError('');
+
+    if (!editingShipment) return;
 
     try {
       const { error: updateError } = await supabase
@@ -238,7 +221,7 @@ export default function AdminDashboard() {
               <select
                 id="status"
                 value={status}
-                onChange={(e) => setStatus(e.target.value)}
+                  onChange={(e) => setStatus(e.target.value as ShipmentStatus)}
               >
                 {STATUS_OPTIONS.map((opt) => (
                   <option key={opt} value={opt}>{opt}</option>
@@ -277,7 +260,7 @@ export default function AdminDashboard() {
                 <select
                   id="editStatus"
                   value={editStatus}
-                  onChange={(e) => setEditStatus(e.target.value)}
+                  onChange={(e) => setEditStatus(e.target.value as ShipmentStatus)}
                 >
                   {STATUS_OPTIONS.map((opt) => (
                     <option key={opt} value={opt}>{opt}</option>

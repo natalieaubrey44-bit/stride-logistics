@@ -2,17 +2,23 @@ import { useEffect } from 'react';
 
 const defaultDescription = 'Stride Logistics coordinates air, sea, and road freight with transparent shipment visibility and responsive operations support.';
 
+type SEOProps = {
+  title?: string;
+  description?: string;
+  path?: string;
+};
+
 export default function SEO({
   title = 'Stride Logistics',
   description = defaultDescription,
   path = '/'
-}) {
+}: SEOProps) {
   useEffect(() => {
     const absoluteUrl = `${window.location.origin}${path}`;
 
     document.title = title;
 
-    const setMeta = (selector, attr, value) => {
+    const setMeta = (selector: string, attr: string, value: string) => {
       let tag = document.head.querySelector(selector);
 
       if (!tag) {

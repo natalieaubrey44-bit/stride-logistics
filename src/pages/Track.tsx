@@ -1,32 +1,22 @@
 import { useState } from 'react';
+import type { FormEvent } from 'react';
 import { Link } from 'react-router-dom';
 import Footer from '../components/Footer';
 import SEO from '../components/SEO';
 import { supabase } from '../lib/supabaseClient';
-
-const getStatusClass = (status) => {
-  const statusMap = {
-    Booked: 'status-booked',
-    'In Transit': 'status-in-transit',
-    'At Customs': 'status-at-customs',
-    'In Wharf': 'status-in-wharf',
-    Arrived: 'status-arrived',
-    Delivered: 'status-delivered'
-  };
-
-  return statusMap[status] || 'status-booked';
-};
+import { getStatusClass } from '../types';
+import type { Shipment } from '../types';
 
 export default function Track() {
   const [trackingNumber, setTrackingNumber] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
-  const [shipment, setShipment] = useState(null);
+  const [shipment, setShipment] = useState<Shipment | null>(null);
   const [searched, setSearched] = useState(false);
 
   const trackingRegex = /^STR-[A-Z0-9]{5}$/;
 
-  const handleSearch = async (e) => {
+  const handleSearch = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setError('');
     setShipment(null);
@@ -58,7 +48,7 @@ export default function Track() {
           setError('An error occurred while fetching the shipment details. Please try again.');
         }
       } else {
-        setShipment(data);
+        setShipment(data as Shipment);
       }
     } catch {
       setError('An unexpected error occurred. Please try again.');

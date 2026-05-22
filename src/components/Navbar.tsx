@@ -2,10 +2,14 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { supabase } from "../lib/supabaseClient";
 
+type Theme = "light" | "dark";
+
 const getStoredTheme = () => localStorage.getItem("theme") || "light";
 
 export default function Navbar() {
-  const [theme, setTheme] = useState(getStoredTheme);
+  const [theme, setTheme] = useState<Theme>(() =>
+    getStoredTheme() === "dark" ? "dark" : "light",
+  );
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
@@ -31,7 +35,7 @@ export default function Navbar() {
   }, []);
 
   useEffect(() => {
-    const handleKeyDown = (event) => {
+    const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
         setMenuOpen(false);
       }
@@ -74,7 +78,7 @@ export default function Navbar() {
     );
 
   const navClassName = `site-nav${scrolled ? " scrolled" : ""}${isAdminDashboard ? " admin-nav" : ""}`;
-  const isActive = (path) => location.pathname === path;
+  const isActive = (path: string) => location.pathname === path;
 
   if (isAdminDashboard) {
     return (
