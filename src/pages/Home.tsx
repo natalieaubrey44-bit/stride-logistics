@@ -208,7 +208,7 @@ const testimonials = [
   {
     quote:
       "Their updates are concise, their handoffs are clean, and our team always knows who owns the next step.",
-    name: "Daniel Okafor",
+    name: "Bobby Brown",
     role: "Import Manager, BlueGate Trading",
     avatar:
       "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=150&q=80",
