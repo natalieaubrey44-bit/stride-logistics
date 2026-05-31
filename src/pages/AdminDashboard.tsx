@@ -1,42 +1,43 @@
-import { useState, useEffect } from 'react';
-import type { FormEvent } from 'react';
-import SEO from '../components/SEO';
-import { supabase } from '../lib/supabaseClient';
-import { generateTrackingNumber } from '../lib/generateTracking';
-import { getStatusClass, STATUS_OPTIONS } from '../types';
-import type { Shipment, ShipmentStatus } from '../types';
+import { useState, useEffect } from "react";
+import type { FormEvent } from "react";
+import SEO from "../components/SEO";
+import AdminChatPanel from "../components/AdminChatPanel";
+import { supabase } from "../lib/supabaseClient";
+import { generateTrackingNumber } from "../lib/generateTracking";
+import { getStatusClass, STATUS_OPTIONS } from "../types";
+import type { Shipment, ShipmentStatus } from "../types";
 
 export default function AdminDashboard() {
   const [shipments, setShipments] = useState<Shipment[]>([]);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
 
   // New Shipment Form State
-  const [customerName, setCustomerName] = useState('');
-  const [origin, setOrigin] = useState('');
-  const [destination, setDestination] = useState('');
-  const [status, setStatus] = useState<ShipmentStatus>('Booked');
-  const [statusNote, setStatusNote] = useState('');
-  const [createdTrackingNumber, setCreatedTrackingNumber] = useState('');
+  const [customerName, setCustomerName] = useState("");
+  const [origin, setOrigin] = useState("");
+  const [destination, setDestination] = useState("");
+  const [status, setStatus] = useState<ShipmentStatus>("Booked");
+  const [statusNote, setStatusNote] = useState("");
+  const [createdTrackingNumber, setCreatedTrackingNumber] = useState("");
 
   // Editing State
   const [editingShipment, setEditingShipment] = useState<Shipment | null>(null);
-  const [editStatus, setEditStatus] = useState<ShipmentStatus>('Booked');
-  const [editStatusNote, setEditStatusNote] = useState('');
+  const [editStatus, setEditStatus] = useState<ShipmentStatus>("Booked");
+  const [editStatusNote, setEditStatusNote] = useState("");
 
   const fetchShipments = async () => {
     setLoading(true);
-    setError('');
+    setError("");
     try {
       const { data, error: fetchError } = await supabase
-        .from('shipments')
-        .select('*')
-        .order('created_at', { ascending: false });
+        .from("shipments")
+        .select("*")
+        .order("created_at", { ascending: false });
 
       if (fetchError) throw fetchError;
       setShipments((data || []) as Shipment[]);
     } catch {
-      setError('Failed to fetch shipments. Please refresh the page.');
+      setError("Failed to fetch shipments. Please refresh the page.");
     } finally {
       setLoading(false);
     }
@@ -52,49 +53,47 @@ export default function AdminDashboard() {
 
   const handleCreateShipment = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setError('');
-    setCreatedTrackingNumber('');
+    setError("");
+    setCreatedTrackingNumber("");
 
     if (!customerName.trim() || !origin.trim() || !destination.trim()) {
-      setError('Customer name, origin, and destination are required.');
+      setError("Customer name, origin, and destination are required.");
       return;
     }
 
     const trackingNum = generateTrackingNumber();
 
     try {
-      const { error: insertError } = await supabase
-        .from('shipments')
-        .insert({
-          tracking_number: trackingNum,
-          customer_name: customerName.trim(),
-          origin: origin.trim(),
-          destination: destination.trim(),
-          status: status,
-          status_note: statusNote.trim()
-        });
+      const { error: insertError } = await supabase.from("shipments").insert({
+        tracking_number: trackingNum,
+        customer_name: customerName.trim(),
+        origin: origin.trim(),
+        destination: destination.trim(),
+        status: status,
+        status_note: statusNote.trim(),
+      });
 
       if (insertError) throw insertError;
 
       setCreatedTrackingNumber(trackingNum);
       // Reset form fields
-      setCustomerName('');
-      setOrigin('');
-      setDestination('');
-      setStatus('Booked');
-      setStatusNote('');
+      setCustomerName("");
+      setOrigin("");
+      setDestination("");
+      setStatus("Booked");
+      setStatusNote("");
 
       // Refresh shipments list
       fetchShipments();
     } catch {
-      setError('Failed to create shipment. Please try again.');
+      setError("Failed to create shipment. Please try again.");
     }
   };
 
   const handleStartEdit = (shipment: Shipment) => {
     setEditingShipment(shipment);
     setEditStatus(shipment.status);
-    setEditStatusNote(shipment.status_note || '');
+    setEditStatusNote(shipment.status_note || "");
   };
 
   const handleCancelEdit = () => {
@@ -103,26 +102,26 @@ export default function AdminDashboard() {
 
   const handleUpdateShipment = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setError('');
+    setError("");
 
     if (!editingShipment) return;
 
     try {
       const { error: updateError } = await supabase
-        .from('shipments')
+        .from("shipments")
         .update({
           status: editStatus,
           status_note: editStatusNote.trim(),
-          updated_at: new Date().toISOString()
+          updated_at: new Date().toISOString(),
         })
-        .eq('id', editingShipment.id);
+        .eq("id", editingShipment.id);
 
       if (updateError) throw updateError;
 
       setEditingShipment(null);
       fetchShipments();
     } catch {
-      setError('Failed to update shipment. Please try again.');
+      setError("Failed to update shipment. Please try again.");
     }
   };
 
@@ -138,30 +137,33 @@ export default function AdminDashboard() {
           <span className="admin-kicker">Operations control</span>
           <h1>Shipments Dashboard</h1>
         </div>
-        <a className="btn btn-primary" href="#new-shipment">New Shipment</a>
+        <a className="btn btn-primary" href="#new-shipment">
+          New Shipment
+        </a>
       </header>
 
       <div className="admin-stack">
-        <section className="admin-metrics" aria-label="Shipment dashboard summary">
+        <section
+          className="admin-metrics"
+          aria-label="Shipment dashboard summary"
+        >
           <div>
             <span>Total shipments</span>
             <strong>{shipments.length}</strong>
           </div>
           <div>
             <span>Active statuses</span>
-            <strong>{new Set(shipments.map((shipment) => shipment.status)).size}</strong>
+            <strong>
+              {new Set(shipments.map((shipment) => shipment.status)).size}
+            </strong>
           </div>
           <div>
             <span>Latest workflow</span>
-            <strong>{shipments[0]?.status || 'Ready'}</strong>
+            <strong>{shipments[0]?.status || "Ready"}</strong>
           </div>
         </section>
 
-        {error && (
-          <div className="alert alert-error">
-            {error}
-          </div>
-        )}
+        {error && <div className="alert alert-error">{error}</div>}
 
         {createdTrackingNumber && (
           <div className="alert alert-success">
@@ -169,9 +171,7 @@ export default function AdminDashboard() {
             <p>
               Please copy the auto-generated tracking number for the customer:
             </p>
-            <div className="tracking-code">
-              {createdTrackingNumber}
-            </div>
+            <div className="tracking-code">{createdTrackingNumber}</div>
           </div>
         )}
 
@@ -221,10 +221,12 @@ export default function AdminDashboard() {
               <select
                 id="status"
                 value={status}
-                  onChange={(e) => setStatus(e.target.value as ShipmentStatus)}
+                onChange={(e) => setStatus(e.target.value as ShipmentStatus)}
               >
                 {STATUS_OPTIONS.map((opt) => (
-                  <option key={opt} value={opt}>{opt}</option>
+                  <option key={opt} value={opt}>
+                    {opt}
+                  </option>
                 ))}
               </select>
             </div>
@@ -248,11 +250,11 @@ export default function AdminDashboard() {
 
         {editingShipment && (
           <section className="admin-card is-editing">
-            <h2>
-              Edit Shipment: {editingShipment.tracking_number}
-            </h2>
+            <h2>Edit Shipment: {editingShipment.tracking_number}</h2>
             <p>
-              Updating status details for <strong>{editingShipment.customer_name}</strong>. Customer name, origin, destination, and tracking number cannot be edited.
+              Updating status details for{" "}
+              <strong>{editingShipment.customer_name}</strong>. Customer name,
+              origin, destination, and tracking number cannot be edited.
             </p>
             <form className="form-grid" onSubmit={handleUpdateShipment}>
               <div className="field">
@@ -260,10 +262,14 @@ export default function AdminDashboard() {
                 <select
                   id="editStatus"
                   value={editStatus}
-                  onChange={(e) => setEditStatus(e.target.value as ShipmentStatus)}
+                  onChange={(e) =>
+                    setEditStatus(e.target.value as ShipmentStatus)
+                  }
                 >
                   {STATUS_OPTIONS.map((opt) => (
-                    <option key={opt} value={opt}>{opt}</option>
+                    <option key={opt} value={opt}>
+                      {opt}
+                    </option>
                   ))}
                 </select>
               </div>
@@ -280,7 +286,9 @@ export default function AdminDashboard() {
               </div>
 
               <div className="admin-actions">
-                <button className="btn btn-primary" type="submit">Save Changes</button>
+                <button className="btn btn-primary" type="submit">
+                  Save Changes
+                </button>
                 <button
                   className="btn btn-outline"
                   type="button"
@@ -323,7 +331,9 @@ export default function AdminDashboard() {
                       <td>{s.origin}</td>
                       <td>{s.destination}</td>
                       <td>
-                        <span className={`status-badge ${getStatusClass(s.status)}`}>
+                        <span
+                          className={`status-badge ${getStatusClass(s.status)}`}
+                        >
                           {s.status}
                         </span>
                       </td>
@@ -345,6 +355,8 @@ export default function AdminDashboard() {
             </div>
           )}
         </section>
+
+        <AdminChatPanel />
       </div>
     </div>
   );
