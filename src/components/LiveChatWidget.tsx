@@ -26,15 +26,10 @@ export default function LiveChatWidget() {
   const [roomId, setRoomId] = useState<string | null>(() =>
     localStorage.getItem(STORAGE_ROOM_KEY),
   );
-  const [visitorName, setVisitorName] = useState("");
-  const [visitorEmail, setVisitorEmail] = useState("");
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [messageDraft, setMessageDraft] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-  const [status, setStatus] = useState<"open" | "closed" | "pending">(
-    "pending",
-  );
   const messagesEndRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
@@ -56,7 +51,6 @@ export default function LiveChatWidget() {
       (payload) => {
         const incoming = payload.new as ChatMessage;
         setMessages((prev) => [...prev, incoming]);
-        setStatus("open");
       },
     );
 
@@ -85,7 +79,6 @@ export default function LiveChatWidget() {
         setError("Unable to load chat history.");
       } else {
         setMessages(data || []);
-        setStatus("open");
       }
 
       setLoading(false);
@@ -101,8 +94,8 @@ export default function LiveChatWidget() {
   const createRoom = async () => {
     const payload = {
       visitor_id: visitorId,
-      visitor_name: visitorName.trim() || "Guest",
-      visitor_email: visitorEmail.trim() || null,
+      visitor_name: "Guest",
+      visitor_email: null,
       status: "open" as const,
     };
 
@@ -132,11 +125,6 @@ export default function LiveChatWidget() {
       return;
     }
 
-    if (!roomId && !visitorName.trim() && !visitorEmail.trim()) {
-      setError("Please provide your name or email before sending.");
-      return;
-    }
-
     setMessageDraft("");
     setLoading(true);
 
@@ -145,7 +133,7 @@ export default function LiveChatWidget() {
       const payload = {
         room_id: activeRoomId,
         sender_type: "visitor",
-        sender_name: visitorName.trim() || "Guest",
+        sender_name: "Guest",
         message: sanitizeInput(trimmed),
       };
 
@@ -153,8 +141,6 @@ export default function LiveChatWidget() {
         .from("chat_messages")
         .insert(payload);
       if (messageError) throw messageError;
-
-      setStatus("open");
     } catch (error) {
       setError("Unable to send your message. Please try again later.");
     } finally {
@@ -162,9 +148,7 @@ export default function LiveChatWidget() {
     }
   };
 
-  const canSend =
-    !!messageDraft.trim() &&
-    (roomId || visitorName.trim() || visitorEmail.trim());
+  const canSend = !!messageDraft.trim();
 
   return (
     <div
@@ -173,62 +157,42 @@ export default function LiveChatWidget() {
     >
       <button
         type="button"
-        className="live-chat-toggle"
+        className={`live-chat-toggle${open ? " open" : ""}`}
         onClick={() => setOpen((value) => !value)}
         aria-expanded={open}
+        aria-label={open ? "Close chat" : "Open chat"}
       >
-        <span>Need help?</span>
-        <strong>{open ? "Close" : "Chat"}</strong>
+        <span className="chat-icon" aria-hidden="true">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+          </svg>
+        </span>
+        <span className="chat-label">Chat</span>
       </button>
 
       <div className="live-chat-panel" hidden={!open}>
-        <div className="live-chat-header">
-          <div>
-            <span>Live support</span>
-            <p>
-              Send a message and our operations team can reply in the dashboard.
-            </p>
-          </div>
-          <span className={`live-chat-status ${status}`}>
-            {status === "open" ? "Waiting for reply" : "Start the chat"}
-          </span>
-        </div>
-
+        <button
+          type="button"
+          className="live-chat-close"
+          onClick={() => setOpen(false)}
+          aria-label="Close chat"
+        >
+          ×
+        </button>
         <div className="live-chat-body">
-          {!roomId && (
-            <div className="live-chat-meta">
-              <div className="field">
-                <label htmlFor="visitorName">Your name</label>
-                <input
-                  id="visitorName"
-                  type="text"
-                  value={visitorName}
-                  onChange={(event) => setVisitorName(event.target.value)}
-                  placeholder="Name"
-                />
-              </div>
-              <div className="field">
-                <label htmlFor="visitorEmail">Email address</label>
-                <input
-                  id="visitorEmail"
-                  type="email"
-                  value={visitorEmail}
-                  onChange={(event) => setVisitorEmail(event.target.value)}
-                  placeholder="you@example.com"
-                />
-              </div>
-            </div>
-          )}
-
           {error && <div className="alert alert-error chat-error">{error}</div>}
 
           <div className="chat-messages-wrapper">
             {loading && <div className="chat-status">Loading messages…</div>}
             {!loading && messages.length === 0 && (
-              <div className="chat-empty">
-                No messages yet. Share your question and an operations agent
-                will reply here.
-              </div>
+              <div className="chat-empty">No messages yet.</div>
             )}
             <div className="chat-messages">
               {messages.map((item) => (
@@ -267,7 +231,7 @@ export default function LiveChatWidget() {
             type="submit"
             disabled={!canSend || loading}
           >
-            {roomId ? "Send message" : "Start chat"}
+            Send
           </button>
         </form>
       </div>

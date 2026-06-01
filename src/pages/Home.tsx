@@ -243,7 +243,7 @@ export default function Home() {
             </h1>
             <p className="animate-fade-in" style={{ animationDelay: "0.14s" }}>
               Stride Logistics coordinates air, sea, and road freight for
-              businesses that cannot afford shipment uncertainty.
+              businesses that cannot afford phipment uncertainty.
             </p>
             <div
               className="hero-actions animate-scale-in"
