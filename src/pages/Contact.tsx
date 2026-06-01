@@ -117,6 +117,7 @@ export default function Contact() {
                   id="fullName"
                   type="text"
                   name="fullName"
+                  autoComplete="name"
                   value={formData.fullName}
                   onChange={handleChange}
                   placeholder="John Doe"
@@ -130,6 +131,7 @@ export default function Contact() {
                   id="email"
                   type="email"
                   name="email"
+                  autoComplete="email"
                   value={formData.email}
                   onChange={handleChange}
                   placeholder="john@example.com"
@@ -144,6 +146,7 @@ export default function Contact() {
                     id="origin"
                     type="text"
                     name="origin"
+                    autoComplete="address-level2"
                     value={formData.origin}
                     onChange={handleChange}
                     placeholder="e.g. New York, USA"
@@ -157,6 +160,7 @@ export default function Contact() {
                     id="destination"
                     type="text"
                     name="destination"
+                    autoComplete="shipping address-level2"
                     value={formData.destination}
                     onChange={handleChange}
                     placeholder="e.g. London, UK"
@@ -170,6 +174,7 @@ export default function Contact() {
                 <textarea
                   id="message"
                   name="message"
+                  autoComplete="off"
                   value={formData.message}
                   onChange={handleChange}
                   placeholder="Tell us about your cargo (weight, dimensions, cargo type)..."

@@ -1,16 +1,19 @@
 :root {
-  --bg: #f8f7f4;
+  --bg: #f6f8fb;
   --surface: #ffffff;
-  --surface-alt: #f3f1ec;
-  --surface-elevated: #eef0e7;
-  --text: #0f0f0f;
-  --text-muted: #5e5e5e;
-  --border: rgba(15, 20, 36, 0.08);
+  --surface-alt: #edf2f7;
+  --surface-elevated: #e4ebf2;
+  --text: #0d1b2a;
+  --text-muted: #516173;
+  --border: rgba(13, 27, 42, 0.12);
   --accent: #e07b2a;
-  --accent-hover: #c96a1a;
+  --accent-hover: #c66a1d;
   --accent-text: #ffffff;
   --navy: #0d1b2a;
-  --navy-surface: #162032;
+  --navy-surface: #16283d;
+  --navy-soft: #e8eef5;
+  --accent-soft: #fff1e6;
+  --page-wash: #f3f6fa;
   --danger: #cc2200;
   --success: #1a7a3a;
   --shadow-sm: 0 1px 10px rgba(0, 0, 0, 0.05);
@@ -26,20 +29,28 @@
 }
 
 html[data-theme="dark"] {
-  --bg: #0a0a0a;
-  --surface: #141414;
-  --surface-alt: #1c1c1c;
-  --surface-elevated: #232323;
-  --text: #f4f4f2;
-  --text-muted: #a9a9a9;
-  --border: rgba(255, 255, 255, 0.08);
+  --bg: #07111d;
+  --surface: #0d1b2a;
+  --surface-alt: #10243a;
+  --surface-elevated: #17304a;
+  --text: #f4f8fc;
+  --text-muted: #b7c5d4;
+  --border: rgba(255, 255, 255, 0.1);
+  --accent: #e07b2a;
+  --accent-hover: #f08c3a;
+  --accent-text: #ffffff;
+  --navy: #0d1b2a;
+  --navy-surface: #16283d;
+  --navy-soft: #10243a;
+  --accent-soft: rgba(224, 123, 42, 0.16);
+  --page-wash: #091626;
   --shadow-sm: 0 1px 10px rgba(0, 0, 0, 0.12);
   --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.22);
   --shadow-lg: 0 14px 36px rgba(0, 0, 0, 0.3);
   --shadow: var(--shadow-md);
   --shadow-dark: 0 22px 52px rgba(0, 0, 0, 0.32);
-  --surface-glass: rgba(20, 20, 20, 0.72);
-  --surface-glass-border: rgba(255, 255, 255, 0.08);
+  --surface-glass: rgba(13, 27, 42, 0.74);
+  --surface-glass-border: rgba(255, 255, 255, 0.1);
 }
 
 ::selection {
@@ -72,6 +83,50 @@ html[data-theme="dark"] {
 .animate-pulse-once {
   opacity: 1;
   animation: pulseOnce 1.15s ease var(--animation-delay, 0s);
+}
+
+.delay-120 {
+  --animation-delay: 0.12s;
+}
+
+.delay-140 {
+  --animation-delay: 0.14s;
+}
+
+.delay-180 {
+  --animation-delay: 0.18s;
+}
+
+.delay-200 {
+  --animation-delay: 0.2s;
+}
+
+.delay-220 {
+  --animation-delay: 0.22s;
+}
+
+.delay-260 {
+  --animation-delay: 0.26s;
+}
+
+.delay-280 {
+  --animation-delay: 0.28s;
+}
+
+.delay-320 {
+  --animation-delay: 0.32s;
+}
+
+.delay-360 {
+  --animation-delay: 0.36s;
+}
+
+.delay-440 {
+  --animation-delay: 0.44s;
+}
+
+.delay-520 {
+  --animation-delay: 0.52s;
 }
 
 @keyframes fadeIn {
@@ -475,7 +530,7 @@ textarea:focus-visible {
 .network-section {
   background:
     linear-gradient(rgba(13, 27, 42, 0.88), rgba(13, 27, 42, 0.88)),
-    url("https://images.unsplash.com/photo-1529074963764-98f45c47344b?w=1600&q=80");
+    url("/images/logistics/network-freight.jpg");
   background-position: center;
   background-size: cover;
   color: #ffffff;
@@ -1235,9 +1290,9 @@ textarea:focus-visible {
 }
 
 html[data-theme="dark"] .live-chat-toggle {
-  background: #2b2b2b;
-  color: #f6f6f4;
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: var(--accent);
+  color: var(--accent-text);
+  border: 1px solid color-mix(in srgb, var(--accent) 28%, transparent);
 }
 
 html[data-theme="dark"] .live-chat-toggle::after {
@@ -1645,21 +1700,31 @@ html[data-theme="dark"] .live-chat-toggle::after {
 }
 
 html[data-theme="dark"] {
-  --bg: #0a0a0a;
-  --surface: #141414;
-  --surface-alt: #1c1c1c;
-  --text: #f0ede8;
-  --text-muted: #888888;
-  --border: #2a2a2a;
+  --bg: #07111d;
+  --surface: #0d1b2a;
+  --surface-alt: #10243a;
+  --surface-elevated: #17304a;
+  --text: #f4f8fc;
+  --text-muted: #b7c5d4;
+  --border: rgba(255, 255, 255, 0.1);
   --accent: #e07b2a;
   --accent-hover: #f08c3a;
   --accent-text: #ffffff;
   --navy: #0d1b2a;
-  --navy-surface: #0f2030;
+  --navy-surface: #16283d;
+  --navy-soft: #10243a;
+  --accent-soft: rgba(224, 123, 42, 0.16);
+  --page-wash: #091626;
   --danger: #ff4422;
   --success: #33bb55;
   --shadow: 0 2px 16px rgba(0, 0, 0, 0.4);
-  --radius: 6px;
+  --shadow-sm: 0 1px 10px rgba(0, 0, 0, 0.18);
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.28);
+  --shadow-lg: 0 14px 36px rgba(0, 0, 0, 0.36);
+  --shadow-dark: 0 22px 52px rgba(0, 0, 0, 0.38);
+  --surface-glass: rgba(13, 27, 42, 0.74);
+  --surface-glass-border: rgba(255, 255, 255, 0.1);
+  --radius: 14px;
 }
 
 * {
@@ -1971,40 +2036,40 @@ textarea:focus {
 .nav-links {
   display: flex;
   align-items: center;
-    gap: 2rem;
-    margin-left: auto;
-  }
+  gap: 2rem;
+  margin-left: auto;
+}
 
-  .nav-actions {
-    display: flex;
-    align-items: center;
-    gap: 2rem;
-    margin-left: 2rem;
-  }
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  margin-left: 2rem;
+}
 
-  .nav-links a {
-    position: relative;
-    color: var(--text-muted);
-    font-weight: 500;
-    padding-bottom: 0.3rem;
-  }
+.nav-links a {
+  position: relative;
+  color: var(--text-muted);
+  font-weight: 500;
+  padding-bottom: 0.3rem;
+}
 
-  .nav-links a::after {
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    height: 2px;
-    background: var(--accent);
-    content: "";
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform 160ms ease;
-  }
+.nav-links a::after {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 2px;
+  background: var(--accent);
+  content: "";
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 160ms ease;
+}
 
-  .nav-links a:hover::after {
-    transform: scaleX(1);
-  }
+.nav-links a:hover::after {
+  transform: scaleX(1);
+}
 
 .icon-button,
 .menu-toggle {
@@ -2127,33 +2192,33 @@ textarea:focus {
 }
 
 .status-booked {
-  background: var(--surface-alt);
-  color: var(--text-muted);
-}
-
-.status-in-transit {
-  background: rgba(224, 123, 42, 0.15);
+  background: color-mix(in srgb, var(--accent-soft) 76%, var(--surface));
   color: var(--accent);
 }
 
+.status-in-transit {
+  background: color-mix(in srgb, var(--accent) 14%, var(--surface));
+  color: var(--accent-hover);
+}
+
 .status-at-customs {
-  background: rgba(204, 34, 0, 0.14);
-  color: #b94214;
+  background: color-mix(in srgb, var(--accent) 14%, var(--surface));
+  color: var(--accent-hover);
 }
 
 .status-in-wharf {
-  background: rgba(75, 95, 115, 0.16);
-  color: #4b5f73;
+  background: color-mix(in srgb, var(--navy-soft) 76%, var(--surface));
+  color: var(--navy);
 }
 
 .status-arrived {
-  background: rgba(26, 122, 58, 0.15);
-  color: var(--success);
+  background: color-mix(in srgb, var(--navy-soft) 76%, var(--surface));
+  color: var(--navy);
 }
 
 .status-delivered {
-  background: var(--success);
-  color: #ffffff;
+  background: var(--navy);
+  color: var(--accent-text);
 }
 
 .home-page {
@@ -2182,7 +2247,7 @@ textarea:focus {
       rgba(13, 27, 42, 0.85) 40%,
       rgba(13, 27, 42, 0.4) 100%
     ),
-    url("https://images.unsplash.com/photo-1494412574643-ff11b0a5c1c3?w=1600&q=80");
+    url("/images/logistics/hero-freight.jpg");
   background-position: center;
   background-size: cover;
   color: #ffffff;
@@ -2309,6 +2374,24 @@ textarea:focus {
   background-repeat: no-repeat;
 }
 
+.service-card-image-sea {
+  background-image:
+    linear-gradient(rgba(13, 27, 42, 0.3), rgba(13, 27, 42, 0.3)),
+    url("/images/logistics/sea-freight.jpg");
+}
+
+.service-card-image-air {
+  background-image:
+    linear-gradient(rgba(13, 27, 42, 0.3), rgba(13, 27, 42, 0.3)),
+    url("/images/logistics/air-freight.jpg");
+}
+
+.service-card-image-road {
+  background-image:
+    linear-gradient(rgba(13, 27, 42, 0.3), rgba(13, 27, 42, 0.3)),
+    url("/images/logistics/road-freight.jpg");
+}
+
 .service-card:hover {
   transform: translateY(-6px);
   box-shadow: var(--shadow-md);
@@ -2341,7 +2424,7 @@ textarea:focus {
   overflow: hidden;
   background-image:
     linear-gradient(180deg, rgba(13, 27, 42, 0.84), rgba(13, 27, 42, 0.68)),
-    url("https://images.unsplash.com/photo-1518459031867-a89b944bffe0?w=1600&q=80");
+    url("/images/logistics/warehouse-freight.jpg");
   background-position: center;
   background-size: cover;
   color: #ffffff;
@@ -2360,7 +2443,7 @@ textarea:focus {
 .why-section {
   background-image:
     linear-gradient(180deg, rgba(13, 27, 42, 0.94), rgba(13, 27, 42, 0.92)),
-    url("https://images.unsplash.com/photo-1560169422-7a6b3a044df4?w=1600&q=80");
+    url("/images/logistics/network-freight.jpg");
   background-position: center;
   background-size: cover;
   color: #ffffff;
@@ -2560,7 +2643,7 @@ textarea:focus {
   align-items: center;
   background-image:
     linear-gradient(rgba(13, 27, 42, 0.82), rgba(13, 27, 42, 0.82)),
-    url("https://images.unsplash.com/photo-1578575437130-527eed3abbec?w=1600&q=80");
+    url("/images/logistics/contact-freight.jpg");
   background-position: center;
   background-size: cover;
   color: #ffffff;
@@ -2847,7 +2930,7 @@ textarea:focus {
     min-height: calc(100vh - 64px);
     background-image:
       linear-gradient(to right, rgba(13, 27, 42, 0.9), rgba(13, 27, 42, 0.66)),
-      url("https://images.unsplash.com/photo-1494412574643-ff11b0a5c1c3?w=1600&q=80");
+      url("/images/logistics/hero-freight.jpg");
   }
 
   .hero-content {
@@ -3065,4 +3148,641 @@ textarea:focus {
     padding: 0.9rem 1.2rem;
     font-size: 0.95rem;
   }
+}
+
+/* Homepage conversion layout */
+.home-page .container {
+  width: min(100% - 32px, 1200px);
+}
+
+.home-page .section,
+.home-page .stats-band {
+  padding: 80px 0;
+}
+
+/* Homepage conversion hero */
+.hero-section .btn-primary {
+  background: var(--accent);
+  color: var(--accent-text);
+}
+
+.hero-section .btn-secondary {
+  border-color: var(--accent-text);
+  color: var(--accent-text);
+}
+
+.hero-section .btn-secondary:hover {
+  background: var(--accent-text);
+  border-color: var(--accent-text);
+  color: var(--navy);
+  transform: translateY(-2px);
+}
+
+/* Homepage conversion stats */
+.stats-band {
+  background: var(--surface-alt);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 24px;
+}
+
+.stat-item {
+  min-width: 0;
+}
+
+/* Homepage conversion how it works */
+.process-section {
+  position: relative;
+  overflow: hidden;
+  background: var(--surface);
+  color: var(--text);
+}
+
+.process-section::before {
+  display: none;
+}
+
+.process-heading {
+  margin-bottom: 4rem;
+}
+
+.process-heading .section-title::after {
+  display: block;
+}
+
+.process-steps {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 24px;
+  width: 100%;
+  max-width: none;
+}
+
+.process-steps::before {
+  position: absolute;
+  top: 42px;
+  left: 10%;
+  right: 10%;
+  height: 1px;
+  background: var(--border);
+  content: "";
+}
+
+.process-step {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 18px;
+  align-content: start;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  padding: 28px 22px;
+  text-align: center;
+}
+
+.process-step-marker {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  justify-items: center;
+  gap: 0.75rem;
+}
+
+.process-step-icon {
+  display: grid;
+  place-items: center;
+  width: 84px;
+  height: 84px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--accent);
+  font-size: 2rem;
+}
+
+.process-step-label {
+  color: var(--accent);
+  font-weight: 800;
+}
+
+.process-step-watermark {
+  position: absolute;
+  top: 6px;
+  right: 12px;
+  color: color-mix(in srgb, var(--accent) 15%, transparent);
+  font-family: "Barlow Condensed", sans-serif;
+  font-size: 5rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.process-step-copy h3 {
+  font-family: "Barlow Condensed", sans-serif;
+  font-size: 1.45rem;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.process-step-copy p {
+  color: var(--text-muted);
+}
+
+/* Homepage conversion why stride */
+.why-section {
+  background: var(--navy);
+  color: var(--accent-text);
+}
+
+.why-grid h2 {
+  color: var(--accent-text);
+}
+
+.why-grid p {
+  max-width: 480px;
+  color: color-mix(in srgb, var(--accent-text) 85%, transparent);
+}
+
+.why-list li {
+  color: color-mix(in srgb, var(--accent-text) 90%, transparent);
+}
+
+.why-list span {
+  color: var(--accent);
+}
+
+/* Homepage conversion CTA */
+.track-cta {
+  background: var(--accent);
+  color: var(--accent-text);
+  text-align: center;
+}
+
+.track-cta .cta-grid {
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+}
+
+.track-cta h2 {
+  color: var(--accent-text);
+}
+
+.track-cta p {
+  max-width: 680px;
+  color: color-mix(in srgb, var(--accent-text) 90%, transparent);
+}
+
+.btn-cta {
+  background: var(--accent-text);
+  color: var(--accent);
+  transition: transform 0.2s ease;
+}
+
+.btn-cta:hover {
+  color: var(--accent);
+  transform: scale(1.03);
+}
+
+@media (max-width: 1024px) {
+  .stats-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .process-steps {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .process-steps::before {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .home-page .section,
+  .home-page .stats-band {
+    padding: 48px 0;
+  }
+
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .process-heading {
+    margin-bottom: 2.5rem;
+  }
+
+  .process-steps {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .process-steps::before {
+    display: block;
+    top: 42px;
+    bottom: 42px;
+    left: 42px;
+    right: auto;
+    width: 1px;
+    height: auto;
+  }
+
+  .process-step {
+    grid-template-columns: auto 1fr;
+    text-align: left;
+  }
+
+  .process-step-marker {
+    justify-items: start;
+  }
+
+  .process-step-icon {
+    width: 72px;
+    height: 72px;
+  }
+
+  .why-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+}
+
+/* Unified orange/navy color system */
+html {
+  background: var(--bg);
+}
+
+body {
+  background:
+    radial-gradient(
+      circle at 12% 0,
+      color-mix(in srgb, var(--accent) 10%, transparent),
+      transparent 34%
+    ),
+    radial-gradient(
+      circle at 88% 12%,
+      color-mix(in srgb, var(--navy) 12%, transparent),
+      transparent 32%
+    ),
+    linear-gradient(180deg, var(--bg), var(--page-wash));
+}
+
+.app-main,
+.home-page,
+.track-page,
+.contact-page,
+.admin-dashboard,
+.admin-login-page,
+.not-found {
+  background:
+    radial-gradient(
+      circle at top left,
+      color-mix(in srgb, var(--accent) 8%, transparent),
+      transparent 32%
+    ),
+    radial-gradient(
+      circle at bottom right,
+      color-mix(in srgb, var(--navy) 11%, transparent),
+      transparent 30%
+    ),
+    var(--bg);
+}
+
+.site-nav {
+  border-bottom-color: var(--border);
+  background: color-mix(in srgb, var(--surface) 94%, transparent);
+}
+
+.site-nav.scrolled {
+  box-shadow: var(--shadow-sm);
+}
+
+.stats-band,
+.industries-section,
+.track-cta {
+  border-color: var(--border);
+}
+
+.stats-band,
+.industries-section {
+  background:
+    linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--navy-soft) 82%, var(--surface-alt)),
+      color-mix(in srgb, var(--surface-alt) 92%, var(--accent-soft))
+    ),
+    url("/images/logistics/warehouse-freight.jpg");
+  background-position: center;
+  background-size: cover;
+}
+
+.section:not(.hero-section):not(.why-section):not(.proof-section):not(.track-cta),
+.contact-form-wrap {
+  background:
+    linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--surface) 94%, transparent),
+      color-mix(in srgb, var(--bg) 92%, var(--accent-soft))
+    ),
+    url("/images/logistics/network-freight.jpg");
+  background-position: center;
+  background-size: cover;
+}
+
+.stat-item,
+.process-step,
+.industry-card,
+.track-panel,
+.tracking-help-card,
+.result-card,
+.contact-form-panel,
+.contact-support-grid article,
+.admin-card,
+.admin-login-card,
+.live-chat-panel,
+.empty-state {
+  border-color: var(--border);
+  background:
+    linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--surface) 96%, transparent),
+      color-mix(in srgb, var(--surface) 92%, var(--navy-soft))
+    ),
+    url("/images/logistics/warehouse-freight.jpg");
+  background-position: center;
+  background-size: cover;
+}
+
+.process-section {
+  background:
+    linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--surface) 90%, var(--navy-soft)),
+      color-mix(in srgb, var(--surface) 84%, var(--accent-soft))
+    ),
+    url("/images/logistics/warehouse-freight.jpg");
+  background-position: center;
+  background-size: cover;
+}
+
+.process-step-icon,
+.industry-icon,
+.tracking-code,
+.track-trust-list span,
+.status-booked,
+.live-chat-status {
+  background: color-mix(in srgb, var(--accent-soft) 76%, var(--surface));
+  color: var(--accent);
+}
+
+.status-in-transit,
+.status-at-customs {
+  background: color-mix(in srgb, var(--accent) 14%, var(--surface));
+  color: var(--accent-hover);
+}
+
+.status-in-wharf,
+.status-arrived {
+  background: color-mix(in srgb, var(--navy-soft) 76%, var(--surface));
+  color: var(--navy);
+}
+
+.status-delivered {
+  background: var(--navy);
+  color: var(--accent-text);
+}
+
+.service-card-content,
+.why-section,
+.proof-section,
+.site-footer {
+  background:
+    linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--navy-surface) 55%, var(--navy)),
+      var(--navy)
+    ),
+    url("/images/logistics/network-freight.jpg");
+  background-position: center;
+  background-size: cover;
+}
+
+.service-card-content,
+.why-section,
+.proof-section,
+.site-footer {
+  color: var(--accent-text);
+}
+
+.service-card-content span,
+.footer-wordmark span:first-child,
+.why-list span,
+.quote-mark {
+  color: var(--accent);
+}
+
+.track-cta {
+  background:
+    linear-gradient(
+      135deg,
+      var(--accent),
+      color-mix(in srgb, var(--accent-hover) 72%, var(--navy))
+    );
+  color: var(--accent-text);
+}
+
+.btn-primary,
+.live-chat-toggle {
+  background: var(--accent);
+  color: var(--accent-text);
+}
+
+.btn-primary:hover,
+.live-chat-toggle:hover {
+  background: var(--accent-hover);
+}
+
+.btn-outline {
+  border-color: var(--border);
+  color: var(--text);
+}
+
+.btn-outline:hover,
+.text-link,
+.nav-links a.active,
+.eyebrow {
+  color: var(--accent);
+}
+
+.live-chat-toggle::after {
+  box-shadow: 0 0 0 0 color-mix(in srgb, var(--accent) 34%, transparent);
+}
+
+.live-chat-header,
+.shipments-table th,
+.shipments-table tbody tr:hover,
+.track-form,
+.admin-metrics div {
+  background: color-mix(in srgb, var(--surface-alt) 88%, var(--navy-soft));
+}
+
+.live-chat-close {
+  background: color-mix(in srgb, var(--navy) 6%, transparent);
+  color: var(--text);
+}
+
+.live-chat-close:hover {
+  background: color-mix(in srgb, var(--accent) 14%, transparent);
+}
+
+html[data-theme="dark"] body {
+  background:
+    radial-gradient(
+      circle at 12% 0,
+      color-mix(in srgb, var(--accent) 16%, transparent),
+      transparent 34%
+    ),
+    radial-gradient(
+      circle at 88% 12%,
+      color-mix(in srgb, var(--navy-surface) 52%, transparent),
+      transparent 32%
+    ),
+    linear-gradient(180deg, var(--bg), var(--page-wash));
+}
+
+html[data-theme="dark"] .app-main,
+html[data-theme="dark"] .home-page,
+html[data-theme="dark"] .track-page,
+html[data-theme="dark"] .contact-page,
+html[data-theme="dark"] .admin-dashboard,
+html[data-theme="dark"] .admin-login-page,
+html[data-theme="dark"] .not-found {
+  background:
+    radial-gradient(
+      circle at top left,
+      color-mix(in srgb, var(--accent) 10%, transparent),
+      transparent 32%
+    ),
+    radial-gradient(
+      circle at bottom right,
+      color-mix(in srgb, var(--navy-surface) 70%, transparent),
+      transparent 30%
+    ),
+    var(--bg);
+}
+
+html[data-theme="dark"] .site-nav {
+  background: color-mix(in srgb, var(--surface) 88%, transparent);
+}
+
+html[data-theme="dark"] .stats-band,
+html[data-theme="dark"] .industries-section {
+  background:
+    linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--surface-alt) 82%, rgba(7, 17, 29, 0.88)),
+      color-mix(in srgb, var(--bg) 92%, rgba(13, 27, 42, 0.84))
+    ),
+    url("/images/logistics/warehouse-freight.jpg");
+  background-position: center;
+  background-size: cover;
+}
+
+html[data-theme="dark"] .section:not(.hero-section):not(.why-section):not(.proof-section):not(.track-cta),
+html[data-theme="dark"] .contact-form-wrap {
+  background:
+    linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--surface) 82%, rgba(7, 17, 29, 0.9)),
+      color-mix(in srgb, var(--surface-alt) 68%, rgba(7, 17, 29, 0.92))
+    ),
+    url("/images/logistics/network-freight.jpg");
+  background-position: center;
+  background-size: cover;
+}
+
+html[data-theme="dark"] .stat-item,
+html[data-theme="dark"] .process-step,
+html[data-theme="dark"] .industry-card,
+html[data-theme="dark"] .track-panel,
+html[data-theme="dark"] .tracking-help-card,
+html[data-theme="dark"] .result-card,
+html[data-theme="dark"] .contact-form-panel,
+html[data-theme="dark"] .contact-support-grid article,
+html[data-theme="dark"] .admin-card,
+html[data-theme="dark"] .admin-login-card,
+html[data-theme="dark"] .live-chat-panel,
+html[data-theme="dark"] .empty-state {
+  background:
+    linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--surface) 88%, rgba(13, 27, 42, 0.86)),
+      color-mix(in srgb, var(--navy-surface) 84%, rgba(7, 17, 29, 0.9))
+    ),
+    url("/images/logistics/warehouse-freight.jpg");
+  background-position: center;
+  background-size: cover;
+}
+
+html[data-theme="dark"] .process-section {
+  background:
+    linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--surface) 78%, rgba(7, 17, 29, 0.9)),
+      color-mix(in srgb, var(--surface-alt) 66%, rgba(7, 17, 29, 0.92))
+    ),
+    url("/images/logistics/warehouse-freight.jpg");
+  background-position: center;
+  background-size: cover;
+}
+
+html[data-theme="dark"] .process-step-icon,
+html[data-theme="dark"] .industry-icon,
+html[data-theme="dark"] .tracking-code,
+html[data-theme="dark"] .track-trust-list span,
+html[data-theme="dark"] .status-booked,
+html[data-theme="dark"] .live-chat-status {
+  background: color-mix(in srgb, var(--accent) 14%, var(--surface));
+  color: var(--accent-hover);
+}
+
+html[data-theme="dark"] .status-in-transit,
+html[data-theme="dark"] .status-at-customs {
+  background: color-mix(in srgb, var(--accent) 16%, var(--surface));
+  color: var(--accent-hover);
+}
+
+html[data-theme="dark"] .status-in-wharf,
+html[data-theme="dark"] .status-arrived {
+  background: color-mix(in srgb, var(--surface-alt) 76%, var(--surface));
+  color: var(--text-muted);
+}
+
+html[data-theme="dark"] .status-delivered {
+  background: color-mix(in srgb, var(--accent) 18%, var(--navy));
+  color: var(--accent-text);
+}
+
+html[data-theme="dark"] .live-chat-toggle {
+  border: 1px solid color-mix(in srgb, var(--accent) 28%, transparent);
+  background: var(--accent);
+  color: var(--accent-text);
+}
+
+html[data-theme="dark"] .live-chat-toggle::after {
+  box-shadow: 0 0 0 0 color-mix(in srgb, var(--accent) 30%, transparent);
+}
+
+html[data-theme="dark"] .live-chat-header,
+html[data-theme="dark"] .shipments-table th,
+html[data-theme="dark"] .shipments-table tbody tr:hover,
+html[data-theme="dark"] .track-form,
+html[data-theme="dark"] .admin-metrics div {
+  background: color-mix(in srgb, var(--surface-alt) 82%, var(--bg));
 }

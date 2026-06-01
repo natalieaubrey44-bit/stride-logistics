@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import type { FormEvent } from "react";
 import { supabase } from "../lib/supabaseClient";
 import { sanitizeInput } from "../lib/sanitize";
@@ -41,32 +41,30 @@ export default function AdminChatPanel() {
   const [error, setError] = useState("");
   const messagesEndRef = useRef<HTMLDivElement | null>(null);
 
-  const loadRooms = async () => {
+  const loadRooms = useCallback(async () => {
     setLoadingRooms(true);
     setError("");
 
-    const { data, error: fetchError } = await (
-      supabase.from("chat_rooms") as any
-    )
+    const { data, error: fetchError } = await supabase
+      .from("chat_rooms")
       .select("*")
       .order("created_at", { ascending: false })
-      .limit(20);
+      .limit(20)
+      .returns<ChatRoom[]>();
 
     if (fetchError) {
       setError("Unable to load chat rooms.");
     } else {
       setRooms(data || []);
-      if (!selectedRoomId && data?.length) {
-        setSelectedRoomId(data[0].id);
-      }
+      setSelectedRoomId((currentRoomId) => currentRoomId ?? data?.[0]?.id ?? null);
     }
 
     setLoadingRooms(false);
-  };
+  }, []);
 
   useEffect(() => {
-    void loadRooms();
-  }, []);
+    void Promise.resolve().then(loadRooms);
+  }, [loadRooms]);
 
   useEffect(() => {
     const channel = supabase.channel("admin-chat-room-list");
@@ -115,12 +113,12 @@ export default function AdminChatPanel() {
       setLoadingMessages(true);
       setError("");
 
-      const { data, error: fetchError } = await (
-        supabase.from("chat_messages") as any
-      )
+      const { data, error: fetchError } = await supabase
+        .from("chat_messages")
         .select("*")
         .eq("room_id", selectedRoomId)
-        .order("created_at", { ascending: true });
+        .order("created_at", { ascending: true })
+        .returns<ChatMessage[]>();
 
       if (fetchError) {
         setError("Unable to load messages for this room.");

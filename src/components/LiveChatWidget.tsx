@@ -68,12 +68,12 @@ export default function LiveChatWidget() {
       setLoading(true);
       setError("");
 
-      const { data, error: fetchError } = await (
-        supabase.from("chat_messages") as any
-      )
+      const { data, error: fetchError } = await supabase
+        .from("chat_messages")
         .select("*")
         .eq("room_id", roomId)
-        .order("created_at", { ascending: true });
+        .order("created_at", { ascending: true })
+        .returns<ChatMessage[]>();
 
       if (fetchError) {
         setError("Unable to load chat history.");
@@ -99,12 +99,11 @@ export default function LiveChatWidget() {
       status: "open" as const,
     };
 
-    const { data, error: insertError } = await (
-      supabase.from("chat_rooms") as any
-    )
+    const { data, error: insertError } = await supabase
+      .from("chat_rooms")
       .insert(payload)
       .select("id")
-      .single();
+      .single<{ id: string | number }>();
 
     if (insertError || !data?.id) {
       throw new Error("Unable to open chat room.");
@@ -141,7 +140,7 @@ export default function LiveChatWidget() {
         .from("chat_messages")
         .insert(payload);
       if (messageError) throw messageError;
-    } catch (error) {
+    } catch {
       setError("Unable to send your message. Please try again later.");
     } finally {
       setLoading(false);

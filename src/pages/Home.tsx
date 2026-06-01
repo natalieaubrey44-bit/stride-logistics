@@ -6,22 +6,19 @@ import CountUp from "../components/CountUp";
 const services = [
   {
     title: "Sea Freight",
-    image:
-      "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=900&q=80",
+    imageClass: "service-card-image-sea",
     body: "Full and partial container loads coordinated across major port lanes with customs-ready documentation.",
     meta: "FCL / LCL / Port coordination",
   },
   {
     title: "Air Freight",
-    image:
-      "https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=900&q=80",
+    imageClass: "service-card-image-air",
     body: "Priority air movement for time-sensitive cargo where missed windows carry real business cost.",
     meta: "Urgent cargo / Airport handling",
   },
   {
     title: "Road Freight",
-    image:
-      "https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?w=900&q=80",
+    imageClass: "service-card-image-road",
     body: "Door-to-door regional haulage built for predictable handoffs, updates, and delivery accountability.",
     meta: "Last mile / Cross-border road",
   },
@@ -30,59 +27,41 @@ const services = [
 const processSteps = [
   {
     label: "01",
-    title: "Plan the lane",
-    body: "We confirm cargo requirements, route constraints, documentation needs, and delivery priorities before movement begins.",
-    icon: (
-      <svg
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.8"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      >
-        <path d="M12 2C8.134 2 5 5.134 5 9c0 4.25 6.38 11.653 6.74 12.066a1 1 0 0 0 1.52 0C12.62 20.653 19 13.25 19 9c0-3.866-3.134-7-7-7Z" />
-        <circle cx="12" cy="9" r="2.5" />
-      </svg>
-    ),
+    icon: "\uD83D\uDCCB",
+    title: "Place Your Booking",
+    body: "Fill out our contact form with your cargo details, origin, and destination.",
   },
   {
     label: "02",
-    title: "Coordinate the move",
-    body: "Stride aligns freight partners, customs support, pickup windows, and transfer checkpoints around one operating plan.",
-    icon: (
-      <svg
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.8"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      >
-        <path d="M5 12h14" />
-        <path d="M12 5l7 7-7 7" />
-        <path d="M5 19V5" />
-      </svg>
-    ),
+    icon: "\uD83D\uDCE6",
+    title: "We Collect Your Cargo",
+    body: "Our team arranges collection from your location at a confirmed time.",
   },
   {
     label: "03",
-    title: "Keep visibility clear",
-    body: "Customers receive simple tracking visibility and direct support when a shipment status needs context.",
-    icon: (
-      <svg
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.8"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      >
-        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8Z" />
-        <circle cx="12" cy="12" r="3" />
-      </svg>
-    ),
+    icon: "\u2708\uFE0F",
+    title: "Your Shipment Moves",
+    body: "Your cargo travels by the fastest available air, sea, or road route.",
   },
+  {
+    label: "04",
+    icon: "\uD83D\uDD0D",
+    title: "Track Every Update",
+    body: "Use your unique tracking number to follow each shipment status update.",
+  },
+  {
+    label: "05",
+    icon: "\u2705",
+    title: "Delivered",
+    body: "Your cargo arrives at its destination. Confirmation sent to you directly.",
+  },
+];
+
+const whyStrideBullets = [
+  "No account needed - track your shipment with just a code",
+  "Direct customs handling support on every international shipment",
+  "Air, sea, and road coverage across 40+ countries",
+  "Personal updates from our team - not bots, not automated delays",
 ];
 
 const industries = [
@@ -223,6 +202,15 @@ const testimonials = [
   },
 ];
 
+const staggerDelays = [
+  "delay-120",
+  "delay-200",
+  "delay-280",
+  "delay-360",
+  "delay-440",
+  "delay-520",
+];
+
 export default function Home() {
   return (
     <div className="home-page">
@@ -237,30 +225,26 @@ export default function Home() {
           <div className="hero-content">
             <span className="eyebrow">Enterprise freight coordination</span>
             <h1 className="animate-slide-up">
-              FREIGHT MOVES BETTER
+              YOUR CARGO,
               <br />
-              <span>WHEN EVERY HANDOFF IS CLEAR</span>
+              <span>DELIVERED WORLDWIDE.</span>
             </h1>
-            <p className="animate-fade-in" style={{ animationDelay: "0.14s" }}>
-              Stride Logistics coordinates air, sea, and road freight for
-              businesses that cannot afford phipment uncertainty.
+            <p className="animate-fade-in delay-140">
+              Stride Logistics moves parcels and freight by air, sea, and road
+              - across borders, through customs, and to the door.
             </p>
-            <div
-              className="hero-actions animate-scale-in"
-              style={{ animationDelay: "0.28s" }}
-            >
+            <div className="hero-actions animate-scale-in delay-280">
               <Link className="btn btn-primary" to="/contact">
-                Request Freight Quote
+                Ship With Us
               </Link>
               <Link className="btn btn-secondary" to="/track">
-                Track Shipment
+                Track Your Shipment
               </Link>
             </div>
           </div>
 
           <aside
-            className="hero-ops-card animate-fade-in"
-            style={{ animationDelay: "0.32s" }}
+            className="hero-ops-card animate-fade-in delay-320"
             aria-label="Stride Logistics operating promise"
           >
             <span>Operations promise</span>
@@ -278,17 +262,16 @@ export default function Home() {
         className="stats-band"
         aria-label="Stride Logistics performance stats"
       >
-        <div
-          className="container stats-grid animate-fade-in"
-          style={{ animationDelay: "0.22s" }}
-        >
-          <CountUp end={500} suffix="+" label="Shipments Coordinated" />
-          <CountUp end={98} suffix="%" label="On-Time Delivery Rate" />
-          <CountUp end={18} label="Priority Trade Lanes" />
-          <div className="stat-item">
-            <span className="stat-number">&lt;24h</span>
-            <span className="stat-label">Operations Response SLA</span>
-          </div>
+        <div className="container stats-grid animate-fade-in delay-220">
+          <CountUp
+            end={200}
+            prefix="1,"
+            suffix="+"
+            label="Shipments Delivered"
+          />
+          <CountUp end={98} suffix=".4%" label="On-Time Delivery Rate" />
+          <CountUp end={40} suffix="+" label="Countries Reached" />
+          <CountUp end={5} suffix="+" label="Years in Operation" />
         </div>
       </section>
 
@@ -305,16 +288,12 @@ export default function Home() {
           <div className="services-grid">
             {services.map((service, index) => (
               <article
-                className="service-card animate-fade-up"
+                className={`service-card animate-fade-up ${staggerDelays[index]}`}
                 key={service.title}
-                style={{ animationDelay: `${0.12 + index * 0.08}s` }}
               >
                 <div
-                  className="service-card-image"
+                  className={`service-card-image ${service.imageClass}`}
                   aria-hidden="true"
-                  style={{
-                    backgroundImage: `linear-gradient(rgba(13, 27, 42, 0.3), rgba(13, 27, 42, 0.3)), url(${service.image})`,
-                  }}
                 />
                 <div className="service-card-content">
                   <span>{service.meta}</span>
@@ -328,25 +307,19 @@ export default function Home() {
       </section>
 
       <section className="section process-section">
-        <div className="container process-grid">
-          <div
-            className="process-intro animate-fade-in"
-            style={{ animationDelay: "0.18s" }}
-          >
-            <span className="eyebrow">Shipment process</span>
-            <h2>PRECISION FROM BOOKING TO DELIVERY</h2>
-            <p>
-              Premium logistics is not just movement. It is the discipline of
-              removing ambiguity before cargo changes hands.
-            </p>
+        <div className="container">
+          <div className="section-heading process-heading animate-fade-in delay-180">
+            <h2 className="section-title">HOW IT WORKS</h2>
           </div>
           <div className="process-steps">
             {processSteps.map((step, index) => (
               <article
-                className="process-step animate-fade-up"
+                className={`process-step animate-fade-up ${staggerDelays[index + 1]}`}
                 key={step.label}
-                style={{ animationDelay: `${0.16 + index * 0.08}s` }}
               >
+                <span className="process-step-watermark" aria-hidden="true">
+                  {step.label}
+                </span>
                 <div className="process-step-marker">
                   <span className="process-step-icon" aria-hidden="true">
                     {step.icon}
@@ -363,36 +336,26 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="section network-section">
-        <div className="container network-grid">
-          <div className="network-panel">
-            <span className="eyebrow">Coverage network</span>
-            <h2>PORTS, AIRPORTS, ROADS, AND RESPONSIBLE HANDOFFS.</h2>
+      <section className="section why-section">
+        <div className="container why-grid">
+          <div>
+            <span className="eyebrow">Why Stride</span>
+            <h2>SHIP WITH MORE CERTAINTY.</h2>
             <p>
-              Stride supports cargo movement across international port lanes,
-              airport freight routes, customs checkpoints, and regional road
-              networks.
+              Most couriers leave you guessing. Stride gives every customer a
+              tracking number, a direct line to our team, and status updates
+              that actually mean something - from dispatch to doorstep.
             </p>
-            <Link className="btn btn-primary" to="/contact">
-              Plan a Shipment
-            </Link>
           </div>
-          <div
-            className="coverage-card"
-            aria-label="Stride coverage highlights"
-          >
-            <div>
-              <strong>3</strong>
-              <span>Continents covered</span>
-            </div>
-            <div>
-              <strong>24/7</strong>
-              <span>Critical status monitoring</span>
-            </div>
-            <div>
-              <strong>1</strong>
-              <span>Accountable operations contact</span>
-            </div>
+          <div>
+            <ul className="why-list" aria-label="Why customers choose Stride">
+              {whyStrideBullets.map((bullet) => (
+                <li key={bullet}>
+                  <span aria-hidden="true">{"\u2713"}</span>
+                  {bullet}
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
       </section>
@@ -410,9 +373,8 @@ export default function Home() {
           <div className="industry-grid">
             {industries.map((industry, index) => (
               <div
-                className="industry-card animate-fade-in"
+                className={`industry-card animate-fade-in ${staggerDelays[index]}`}
                 key={industry.title}
-                style={{ animationDelay: `${0.12 + index * 0.08}s` }}
               >
                 <span className="industry-icon" aria-hidden="true">
                   {industry.icon}
@@ -437,9 +399,8 @@ export default function Home() {
           <div className="testimonial-grid">
             {testimonials.map((testimonial, index) => (
               <article
-                className="testimonial-card animate-fade-up"
+                className={`testimonial-card animate-fade-up ${staggerDelays[index + 1]}`}
                 key={testimonial.name}
-                style={{ animationDelay: `${0.16 + index * 0.08}s` }}
               >
                 <div className="testimonial-header">
                   <div className="testimonial-avatar">
@@ -466,23 +427,16 @@ export default function Home() {
 
       <section className="section track-cta">
         <div className="container cta-grid">
-          <div className="animate-fade-in" style={{ animationDelay: "0.18s" }}>
-            <span className="eyebrow">Shipment visibility</span>
-            <h2>KNOW WHERE YOUR CARGO IS</h2>
+          <div className="animate-fade-in delay-180">
+            <h2>READY TO SHIP?</h2>
             <p>
-              Enter your tracking number and get a simple, instant shipment
-              status update.
+              Get in touch with our team and we'll handle the rest - from
+              collection to delivery, anywhere in the world.
             </p>
           </div>
-          <div
-            className="cta-actions animate-fade-in"
-            style={{ animationDelay: "0.26s" }}
-          >
-            <Link className="btn btn-primary" to="/track">
-              Track Shipment
-            </Link>
-            <Link className="btn btn-outline" to="/contact">
-              Talk to Operations
+          <div className="cta-actions animate-fade-in delay-260">
+            <Link className="btn btn-cta" to="/contact">
+              Ship With Us
             </Link>
           </div>
         </div>
